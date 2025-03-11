@@ -1,0 +1,1 @@
+<ns:Book xmlns:ns="http://www.example.com/xsd/books" xmlns:tns2="http://www.example.org/Books"><ns:Title>Cat among the Pigeon</ns:Title><ns:Author>Agatha Christie</ns:Author><ns:Date>1988</ns:Date><ns:ISBN>123-554-343</ns:ISBN><ns:Publisher>Dell Publishing Co</ns:Publisher></ns:Book>

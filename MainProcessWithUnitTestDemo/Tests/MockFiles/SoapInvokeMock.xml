@@ -1,0 +1,11 @@
+<GetBooks.message>
+<ns:BookStore xmlns:ns="http://www.example.com/xsd/books" xmlns:tns="http://www.example.com/interface/books/GetBooksImpl">
+  <ns:Book>
+    <ns:Title>My Life and Times</ns:Title>
+    <ns:Author>Paul McCartney</ns:Author>
+    <ns:Date>1988</ns:Date>
+    <ns:ISBN>1-56592-235-2</ns:ISBN>
+    <ns:Publisher>McMillin Publishing</ns:Publisher>
+  </ns:Book>
+</ns:BookStore>
+</GetBooks.message>

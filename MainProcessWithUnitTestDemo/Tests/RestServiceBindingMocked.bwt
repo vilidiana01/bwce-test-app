@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emulation:EmulationData xmlns:emulation="http:///emulation.ecore" isBW="true" location="/MainProcessWithUnitTestDemo/Tests/RestServiceBindingMocked.bwt">
+  <ProcessNode Id="mainprocesswithunittestdemo.RESTServicBindingeMocked" Name="mainprocesswithunittestdemo.RESTServicBindingeMocked" ModelType="BW" moduleName="MainProcessWithUnitTestDemo" componentProcessName="ComponentResource">
+    <restNode Name="Resource">
+      <Operation Name="post" serviceName="resource" restOperationName="REST">
+        <Inputs Id="b9d68a53-d0de-4e71-b227-bb5c15cd764bMainProcessWithUnitTestDemo_mainprocesswithunittestdemo.RESTServicBindingeMocked_post_post" Name="post" isDefault="true" type="REST" restURL="http://8076:" isInputFile="true" inputFile="Tests/MockFiles/RestBindingMock.xml"/>
+      </Operation>
+    </restNode>
+    <Assertion Id="a6baad70-424f-4f8a-9a01-662fc7473292" Name="Mapper" hasDecoration="true" assertionType="Activity" goldOutputFromFile="true">
+      <Lang>urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0</Lang>
+      <Expression>&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version=&quot;2.0&quot; >&lt;xsl:param name=&quot;Mapper&quot;  /> &lt;xsl:template name=&quot;Mapper&quot; match=&quot;/&quot; >&lt;xsl:variable name=&quot;activityTestInput&quot; as=&quot;item()*&quot;>&lt;Activity-Assertion> &lt;xsl:copy-of select=&quot;$Mapper&quot;  /> &lt;/Activity-Assertion> &lt;/xsl:variable> &lt;xsl:variable name=&quot;AssertType&quot; as=&quot;item()*&quot;>&lt;Activity-Assertion> &lt;xsl:copy-of select=&quot;doc('file:///Tests/GoldFiles/Mapper1.xml')&quot;  /> &lt;/Activity-Assertion> &lt;/xsl:variable> &lt;xsl:choose>&lt;xsl:when test=&quot;deep-equal($activityTestInput,$AssertType)&quot;>&lt;result status=&quot;passed&quot; message=&quot;Assertion passed.&quot;/>&lt;/xsl:when>&lt;xsl:otherwise>&lt;result status=&quot;failed&quot; message=&quot;Assertion failed.&quot;/>&lt;/xsl:otherwise>&lt;/xsl:choose> &lt;/xsl:template>&lt;/xsl:stylesheet></Expression>
+      <OriginalExpression>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
+&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Mapper&quot;/>&lt;xsl:template name=&quot;Mapper&quot; match=&quot;/&quot;>&lt;Activity-Assertion>&lt;activityTestInput>&lt;xsl:value-of select=&quot;$Mapper&quot;/>&lt;/activityTestInput>&lt;AssertType>&lt;testFilePath>&lt;xsl:value-of select=&quot;doc('file:///Tests/GoldFiles/Mapper1.xml')&quot;/>&lt;/testFilePath>&lt;/AssertType>&lt;/Activity-Assertion>&lt;/xsl:template>&lt;/xsl:stylesheet></OriginalExpression>
+    </Assertion>
+    <MockActivity Id="f491a967-8c61-4c23-857d-32c46acf6486" Name="JMSSendMessage" hasDecoration="true">
+      <MockOutputFilePath>Tests/MockFiles/jmsSendMessageMock.xml</MockOutputFilePath>
+    </MockActivity>
+  </ProcessNode>
+</emulation:EmulationData>

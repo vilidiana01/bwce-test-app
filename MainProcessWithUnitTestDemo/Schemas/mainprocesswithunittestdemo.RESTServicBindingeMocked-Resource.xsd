@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="/T1632721710842Converted/JsonSchema" xmlns:tns="/T1632721710842Converted/JsonSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Book" type="tns:Book"/>
+    <xs:complexType name="Book">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="isbn" type="xs:string"/>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element minOccurs="0" name="description" type="xs:string"/>
+            <xs:element minOccurs="0" name="authorName" type="xs:string"/>
+            <xs:element minOccurs="0" name="releaseDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="vintage" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="signed" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="price" type="xs:float"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Book_releaseDate" type="tns:Book_releaseDate"/>
+    <xs:simpleType name="Book_releaseDate">
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:element name="Book_price" type="tns:Book_price"/>
+    <xs:simpleType name="Book_price">
+        <xs:restriction base="xs:float"/>
+    </xs:simpleType>
+</xs:schema>

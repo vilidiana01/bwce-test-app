@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emulation:EmulationData xmlns:emulation="http:///emulation.ecore" isBW="true" location="/MainProcessWithUnitTestDemo/Tests/SoapServiceBindingMocked.bwt">
+  <ProcessNode Id="mainprocesswithunittestdemo.SOAPServiceBindingMocked" Name="mainprocesswithunittestdemo.SOAPServiceBindingMocked" ModelType="BW" moduleName="MainProcessWithUnitTestDemo" componentProcessName="ComponentSOAP_Service">
+    <Assertion Id="34d56613-0623-46a8-9259-23d1e74289de" Name="Mapper" hasDecoration="true" assertionType="Activity" goldOutputFromFile="true">
+      <Lang>urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0</Lang>
+      <Expression>&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version=&quot;2.0&quot; >&lt;xsl:param name=&quot;Mapper&quot;  /> &lt;xsl:template name=&quot;Mapper&quot; match=&quot;/&quot; >&lt;xsl:variable name=&quot;activityTestInput&quot; as=&quot;item()*&quot;>&lt;Activity-Assertion> &lt;xsl:copy-of select=&quot;$Mapper&quot;  /> &lt;/Activity-Assertion> &lt;/xsl:variable> &lt;xsl:variable name=&quot;AssertType&quot; as=&quot;item()*&quot;>&lt;Activity-Assertion> &lt;xsl:copy-of select=&quot;doc('file:///Tests/GoldFiles/Mapper2.xml')&quot;  /> &lt;/Activity-Assertion> &lt;/xsl:variable> &lt;xsl:choose>&lt;xsl:when test=&quot;deep-equal($activityTestInput,$AssertType)&quot;>&lt;result status=&quot;passed&quot; message=&quot;Assertion passed.&quot;/>&lt;/xsl:when>&lt;xsl:otherwise>&lt;result status=&quot;failed&quot; message=&quot;Assertion failed.&quot;/>&lt;/xsl:otherwise>&lt;/xsl:choose> &lt;/xsl:template>&lt;/xsl:stylesheet></Expression>
+      <OriginalExpression>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
+&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Mapper&quot;/>&lt;xsl:template name=&quot;Mapper&quot; match=&quot;/&quot;>&lt;Activity-Assertion>&lt;activityTestInput>&lt;xsl:value-of select=&quot;$Mapper&quot;/>&lt;/activityTestInput>&lt;AssertType>&lt;testFilePath>&lt;xsl:value-of select=&quot;doc('file:///Tests/GoldFiles/Mapper2.xml')&quot;/>&lt;/testFilePath>&lt;/AssertType>&lt;/Activity-Assertion>&lt;/xsl:template>&lt;/xsl:stylesheet></OriginalExpression>
+    </Assertion>
+    <Operation Name="GetBooks" serviceName="GetBooksByAuthor" restOperationName="SOAP">
+      <Inputs Id="21852193-a830-4137-b6d4-56df641497b4MainProcessWithUnitTestDemo_mainprocesswithunittestdemo.SOAPServiceBindingMocked_GetBooks_GetBooks" Name="GetBooks" isDefault="true" isInputFile="true" inputFile="Tests/MockFiles/SoapBindingMock.xml"/>
+    </Operation>
+  </ProcessNode>
+</emulation:EmulationData>

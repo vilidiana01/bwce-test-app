@@ -1,0 +1,24 @@
+<JMSReceiveMessage>
+<ns:ActivityOutput xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/jms+8c4ce3a3-2ed8-46d2-8924-18d963099b6e+output">
+  <JMSHeaders>
+    <ns:JMSDestination>test23</ns:JMSDestination>
+    <ns:JMSDeliveryMode>PERSISTENT</ns:JMSDeliveryMode>
+    <ns:JMSMessageID>ID:EMS-SERVER.1B68613F40A4B83:1</ns:JMSMessageID>
+    <ns:JMSTimestamp>1632721947120</ns:JMSTimestamp>
+    <ns:JMSExpiration>0</ns:JMSExpiration>
+    <ns:JMSRedelivered>false</ns:JMSRedelivered>
+    <ns:JMSPriority>4</ns:JMSPriority>
+  </JMSHeaders>
+  <JMSProperties>
+    <JMSXDeliveryCount xmlns="http://www.tibco.com/namespaces/tnt/plugins/jms+8c4ce3a3-2ed8-46d2-8924-18d963099b6e+output">1</JMSXDeliveryCount>
+  </JMSProperties>
+  <Body>Cat among the Pigeon</Body>
+  <DynamicProperties>
+    <property xmlns="http://www.tibco.com/namespaces/tnt/plugins/jms+8c4ce3a3-2ed8-46d2-8924-18d963099b6e+output">
+      <name>Author</name>
+      <value>Agatha Christie</value>
+      <type>string</type>
+    </property>
+  </DynamicProperties>
+</ns:ActivityOutput>
+</JMSReceiveMessage>

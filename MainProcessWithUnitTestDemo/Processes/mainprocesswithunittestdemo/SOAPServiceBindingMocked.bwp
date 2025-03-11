@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpws:process exitOnStandardFault="no"
+    name="mainprocesswithunittestdemo.SOAPServiceBindingMocked"
+    suppressJoinFailure="yes"
+    targetNamespace="http://xmlns.example.com/20210924133600"
+    xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:info="http://www.tibco.com/bw/process/info"
+    xmlns:ns="http://www.tibco.com/pe/EngineTypes"
+    xmlns:ns0="http://xmlns.example.com/20210924133600PLT"
+    xmlns:ns1="http://www.example.com/interface/books/GetBooksImpl"
+    xmlns:ns2="http://www.example.com/xsd/books"
+    xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+    xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
+    xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
+    xmlns:tibprop="http://ns.tibco.com/bw/property" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <tibex:VariableDescriptor type="MemorySaving">
+        <task name="GetBooksOut">
+            <endingVariables>
+                <variable>GetBooksOut-input</variable>
+            </endingVariables>
+        </task>
+        <task name="Mapper">
+            <endingVariables>
+                <variable>Mapper-input</variable>
+                <variable>Mapper</variable>
+                <variable>GetBooksIn</variable>
+            </endingVariables>
+        </task>
+    </tibex:VariableDescriptor>
+    <tibex:Types>
+        <xs:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/pe/EngineTypes"
+            xmlns:tns="http://www.tibco.com/pe/EngineTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="ErrorReport">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Class" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="OptionalErrorReport">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Class" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="FaultDetail">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ActivityName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Class" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="ProcessContext">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="JobId" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ApplicationName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="EngineName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessInstanceId" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="CustomJobId" type="xs:string"/>
+                    <!--xs:element name="RestartedFromCheckpoint" form="unqualified" block="extension restriction substitution" type="xs:boolean"/-->
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="TrackingInfo" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="anydata">
+                <xs:sequence>
+                    <xs:any namespace="##any" processContents="lax"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="OptionalErrorReport" type="tns:OptionalErrorReport"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="ErrorReport" type="tns:ErrorReport"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="FaultDetail" type="tns:FaultDetail"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="ProcessContext" type="tns:ProcessContext"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="CorrelationValue" type="xs:string"/>
+        </xs:schema>
+        <schema attributeFormDefault="unqualified"
+            elementFormDefault="unqualified"
+            targetNamespace="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions"
+            version="" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions">
+            <complexType name="ActivityExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <element name="ActivityException" type="tns:ActivityExceptionType"/>
+            <complexType name="ActivityTimedOutExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="ActivityTimedOutException" type="tns:ActivityTimedOutExceptionType"/>
+            <complexType name="DuplicateKeyExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType">
+                        <sequence>
+                            <element name="duplicateKey" type="string"/>
+                            <element minOccurs="0" name="previousJobID" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DuplicateKeyException" type="tns:DuplicateKeyExceptionType"/>
+        </schema>
+        <wsdl:definitions
+            targetNamespace="http://xmlns.example.com/20210924133600PLT"
+            xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+            xmlns:ptyp="http://www.example.com/interface/books/GetBooksImpl"
+            xmlns:tns="http://xmlns.example.com/20210924133600PLT"
+            xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
+            xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <plnk:partnerLinkType name="partnerLinkType">
+                <plnk:role name="use" portType="ptyp:GetBooksByAuthor"/>
+            </plnk:partnerLinkType>
+            <wsdl:import namespace="http://www.example.com/interface/books/GetBooksImpl"/>
+        </wsdl:definitions>
+    </tibex:Types>
+    <tibex:ProcessInfo callable="false" createdBy="administrator"
+        createdOn="Fri Sep 24 13:36:00 IST 2021" description=""
+        extraErrorVars="true" modifiers="public"
+        productVersion="2.7.0 V48 2021-09-21" scalable="true"
+        singleton="true" stateless="true" type="IT"/>
+    <tibex:ProcessInterface context="" input="" output=""/>
+    <tibex:ProcessTemplateConfigurations/>
+    <notation:Diagram measurementUnit="Pixel" type="BWProcess"
+        xmlns:bwnotation="http://tns.tibco.com/bw/runtime/BWNotation"
+        xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <children type="2001">
+            <children type="5001">
+                <element href="//0/@process"/>
+            </children>
+            <children type="3001">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <children type="3002">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <children type="3003">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <children type="3004">
+                <children type="4018">
+                    <children type="3018">
+                        <children type="4020">
+                            <children type="3020">
+                                <children type="4005">
+                                    <children type="3007">
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint x="-39"
+                                    xsi:type="notation:Bounds" y="103"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint x="331"
+                                    xsi:type="notation:Bounds" y="103"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint x="127"
+                                    xsi:type="notation:Bounds" y="103"/>
+                                    </children>
+                                    <styles xsi:type="notation:DrawerStyle"/>
+                                    <styles xsi:type="notation:SortingStyle"/>
+                                    <styles xsi:type="notation:FilteringStyle"/>
+                                    <element href="//0/@process/@activity/@activity"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <element href="//0/@process/@activity/@activity"/>
+                                    <layoutConstraint height="384"
+                                    width="515" xsi:type="notation:Bounds"/>
+                                </children>
+                                <styles xsi:type="notation:SortingStyle"/>
+                                <styles xsi:type="notation:FilteringStyle"/>
+                                <element href="//0/@process/@activity"/>
+                            </children>
+                            <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+                            <styles xsi:type="bwnotation:BackgroundStyle"/>
+                            <styles xsi:type="bwnotation:ResizingStyle"/>
+                            <element href="//0/@process/@activity"/>
+                            <layoutConstraint height="365" width="444"
+                                x="30" xsi:type="notation:Bounds" y="20"/>
+                        </children>
+                        <styles xsi:type="notation:SortingStyle"/>
+                        <styles xsi:type="notation:FilteringStyle"/>
+                        <element href="//0/@process/@activity"/>
+                    </children>
+                    <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+                    <styles xsi:type="bwnotation:BackgroundStyle"/>
+                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                    <element href="//0/@process/@activity"/>
+                    <layoutConstraint height="409" width="519" xsi:type="notation:Bounds"/>
+                </children>
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+            <element href="//0/@process"/>
+            <layoutConstraint height="460" width="860" xsi:type="notation:Bounds"/>
+        </children>
+        <styles xsi:type="notation:DiagramStyle"/>
+        <element href="//0"/>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[25, 0, -206, 0]$[207, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+    </notation:Diagram>
+    <tibex:NamespaceRegistry enabled="true">
+        <tibex:namespaceItem
+            namespace="http://www.example.com/xsd/books" prefix="ns"/>
+        <tibex:namespaceItem
+            namespace="http://www.example.com/interface/books/GetBooksImpl" prefix="tns"/>
+    </tibex:NamespaceRegistry>
+    <bpws:import importType="http://schemas.xmlsoap.org/wsdl/" namespace="http://www.example.com/interface/books/GetBooksImpl"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema"
+        location="../../Schemas/Books.xsd" namespace="http://www.example.com/xsd/books"/>
+    <bpws:partnerLinks>
+        <bpws:partnerLink myRole="use" name="GetBooksByAuthor"
+            partnerLinkType="ns0:partnerLinkType"
+            sca-bpel:ignore="false" sca-bpel:service="GetBooksByAuthor"/>
+    </bpws:partnerLinks>
+    <bpws:variables>
+        <bpws:variable element="ns:ProcessContext"
+            name="_processContext" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns1:GetBooksByAuthor"
+            name="GetBooksIn" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns1:GetBooksOut"
+            name="GetBooksOut-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns2:BookStore" name="Mapper-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns2:BookStore" name="Mapper" sca-bpel:internal="true"/>
+    </bpws:variables>
+    <bpws:extensions>
+        <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
+        <bpws:extension mustUnderstand="no" namespace="http://www.tibco.com/bw/process/info"/>
+        <bpws:extension mustUnderstand="no" namespace="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"/>
+        <bpws:extension mustUnderstand="no" namespace="http://docs.oasis-open.org/ns/opencsa/sca/200912"/>
+        <bpws:extension mustUnderstand="no" namespace="http://ns.tibco.com/bw/property"/>
+        <bpws:extension mustUnderstand="no" namespace="http://www.tibco.com/bpel/2007/extensions"/>
+    </bpws:extensions>
+    <bpws:scope name="scope">
+        <bpws:flow name="flow">
+            <bpws:links>
+                <bpws:link name="GetBooksInToMapper" tibex:linkType="SUCCESS"/>
+                <bpws:link name="MapperToGetBooksOut" tibex:linkType="SUCCESS"/>
+            </bpws:links>
+            <bpws:receive createInstance="yes" name="GetBooksIn"
+                operation="GetBooks" partnerLink="GetBooksByAuthor"
+                portType="ns1:GetBooksByAuthor"
+                tibex:xpdlId="21852193-a830-4137-b6d4-56df641497b4" variable="GetBooksIn">
+                <bpws:sources>
+                    <bpws:source linkName="GetBooksInToMapper"/>
+                </bpws:sources>
+            </bpws:receive>
+            <bpws:reply name="GetBooksOut" operation="GetBooks"
+                partnerLink="GetBooksByAuthor"
+                portType="ns1:GetBooksByAuthor"
+                tibex:xpdlId="db15afef-80e8-4740-80be-4f4717286b43" variable="GetBooksOut-input">
+                <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://www.example.com/interface/books/GetBooksImpl" xmlns:ns="http://www.example.com/xsd/books" version="2.0"&gt;&lt;xsl:template name="GetBooksOut-input" match="/"&gt;&lt;tns:GetBooksOut&gt;&lt;message&gt;&lt;ns:BookStore&gt;&lt;ns:Book&gt;&lt;ns:Title&gt;&lt;xsl:value-of select="&amp;quot;My Life and Times&amp;quot;"/&gt;&lt;/ns:Title&gt;&lt;ns:Author&gt;&lt;xsl:value-of select="&amp;quot;Paul McCartney&amp;quot;"/&gt;&lt;/ns:Author&gt;&lt;ns:Date&gt;&lt;xsl:value-of select="&amp;quot;1988&amp;quot;"/&gt;&lt;/ns:Date&gt;&lt;ns:ISBN&gt;&lt;xsl:value-of select="&amp;quot;1-56592-235-2&amp;quot;"/&gt;&lt;/ns:ISBN&gt;&lt;ns:Publisher&gt;&lt;xsl:value-of select="&amp;quot;McMillin Publishing&amp;quot;"/&gt;&lt;/ns:Publisher&gt;&lt;/ns:Book&gt;&lt;/ns:BookStore&gt;&lt;/message&gt;&lt;/tns:GetBooksOut&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+                <tibex:inputBindings>
+                    <tibex:partBinding
+                        expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.example.com/interface/books/GetBooksImpl&quot; xmlns:ns=&quot;http://www.example.com/xsd/books&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;GetBooksOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;ns:BookStore>&#xa;            &lt;ns:Book>&#xa;                &lt;ns:Title>&#xa;                    &lt;xsl:value-of select=&quot;&amp;quot;My Life and Times&amp;quot;&quot;/>&#xa;                &lt;/ns:Title>&#xa;                &lt;ns:Author>&#xa;                    &lt;xsl:value-of select=&quot;&amp;quot;Paul McCartney&amp;quot;&quot;/>&#xa;                &lt;/ns:Author>&#xa;                &lt;ns:Date>&#xa;                    &lt;xsl:value-of select=&quot;&amp;quot;1988&amp;quot;&quot;/>&#xa;                &lt;/ns:Date>&#xa;                &lt;ns:ISBN>&#xa;                    &lt;xsl:value-of select=&quot;&amp;quot;1-56592-235-2&amp;quot;&quot;/>&#xa;                &lt;/ns:ISBN>&#xa;                &lt;ns:Publisher>&#xa;                    &lt;xsl:value-of select=&quot;&amp;quot;McMillin Publishing&amp;quot;&quot;/>&#xa;                &lt;/ns:Publisher>&#xa;            &lt;/ns:Book>&#xa;        &lt;/ns:BookStore>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                </tibex:inputBindings>
+                <bpws:targets>
+                    <bpws:target linkName="MapperToGetBooksOut"/>
+                </bpws:targets>
+            </bpws:reply>
+            <bpws:extensionActivity>
+                <tibex:activityExtension
+                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:ns=&quot;http://www.example.com/xsd/books&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;GetBooksIn&quot;/>&lt;xsl:template name=&quot;Mapper-input&quot; match=&quot;/&quot;>&lt;ns:BookStore>&lt;xsl:choose>&lt;xsl:when test=&quot;$GetBooksIn/author/ns:Author=&amp;quot;Agatha Christie&amp;quot;&quot;>&lt;ns:Book>&lt;ns:Title>&lt;xsl:value-of select=&quot;&amp;quot;Cat among the Pigeons&amp;quot;&quot;/>&lt;/ns:Title>&lt;ns:Author>&lt;xsl:value-of select=&quot;&amp;quot;Agatha Cristie&amp;quot;&quot;/>&lt;/ns:Author>&lt;ns:Date>&lt;xsl:value-of select=&quot;&amp;quot;1995&amp;quot;&quot;/>&lt;/ns:Date>&lt;ns:ISBN>&lt;xsl:value-of select=&quot;&amp;quot;123-086-333&amp;quot;&quot;/>&lt;/ns:ISBN>&lt;ns:Publisher>&lt;xsl:value-of select=&quot;&amp;quot;Dell Publishing Co&amp;quot;&quot;/>&lt;/ns:Publisher>&lt;/ns:Book>&lt;/xsl:when>&lt;xsl:when test=&quot;$GetBooksIn/author/ns:Author=&amp;quot;Paul McCartney&amp;quot;&quot;>&lt;ns:Book>&lt;ns:Title>&lt;xsl:value-of select=&quot;&amp;quot;Illusions The Adventures of a Reluctant Messiah&amp;quot;&quot;/>&lt;/ns:Title>&lt;ns:Author>&lt;xsl:value-of select=&quot;&amp;quot;Paul McCartney&amp;quot;&quot;/>&lt;/ns:Author>&lt;ns:Date>&lt;xsl:value-of select=&quot;&amp;quot;1977&amp;quot;&quot;/>&lt;/ns:Date>&lt;ns:ISBN>&lt;xsl:value-of select=&quot;&amp;quot;6565-6565-77&amp;quot;&quot;/>&lt;/ns:ISBN>&lt;ns:Publisher>&lt;xsl:value-of select=&quot;&amp;quot;McMillin Publishing&amp;quot;&quot;/>&lt;/ns:Publisher>&lt;/ns:Book>&lt;/xsl:when>&lt;xsl:otherwise>&lt;ns:Book>&lt;ns:Title>&lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&lt;/ns:Title>&lt;ns:Author>&lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&lt;/ns:Author>&lt;ns:Date>&lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&lt;/ns:Date>&lt;ns:ISBN>&lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&lt;/ns:ISBN>&lt;ns:Publisher>&lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&lt;/ns:Publisher>&lt;/ns:Book>&lt;/xsl:otherwise>&lt;/xsl:choose>&lt;/ns:BookStore>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
+                    inputVariable="Mapper-input" name="Mapper"
+                    outputVariable="Mapper"
+                    tibex:xpdlId="34d56613-0623-46a8-9259-23d1e74289de" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="GetBooksInToMapper"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="MapperToGetBooksOut"/>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:ns=&quot;http://www.example.com/xsd/books&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;GetBooksIn.author&quot;/>&#xa;    &lt;xsl:template name=&quot;Mapper-input&quot; match=&quot;/&quot;>&#xa;        &lt;ns:BookStore>&#xa;            &lt;xsl:choose>&#xa;                &lt;xsl:when test=&quot;$GetBooksIn.author=&amp;quot;Agatha Christie&amp;quot;&quot;>&#xa;                    &lt;ns:Book>&#xa;                        &lt;ns:Title>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Cat among the Pigeons&amp;quot;&quot;/>&#xa;                        &lt;/ns:Title>&#xa;                        &lt;ns:Author>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Agatha Cristie&amp;quot;&quot;/>&#xa;                        &lt;/ns:Author>&#xa;                        &lt;ns:Date>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;1995&amp;quot;&quot;/>&#xa;                        &lt;/ns:Date>&#xa;                        &lt;ns:ISBN>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;123-086-333&amp;quot;&quot;/>&#xa;                        &lt;/ns:ISBN>&#xa;                        &lt;ns:Publisher>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Dell Publishing Co&amp;quot;&quot;/>&#xa;                        &lt;/ns:Publisher>&#xa;                    &lt;/ns:Book>&#xa;                &lt;/xsl:when>&#xa;                &lt;xsl:when test=&quot;$GetBooksIn.author=&amp;quot;Paul McCartney&amp;quot;&quot;>&#xa;                    &lt;ns:Book>&#xa;                        &lt;ns:Title>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Illusions The Adventures of a Reluctant Messiah&amp;quot;&quot;/>&#xa;                        &lt;/ns:Title>&#xa;                        &lt;ns:Author>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Paul McCartney&amp;quot;&quot;/>&#xa;                        &lt;/ns:Author>&#xa;                        &lt;ns:Date>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;1977&amp;quot;&quot;/>&#xa;                        &lt;/ns:Date>&#xa;                        &lt;ns:ISBN>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;6565-6565-77&amp;quot;&quot;/>&#xa;                        &lt;/ns:ISBN>&#xa;                        &lt;ns:Publisher>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;McMillin Publishing&amp;quot;&quot;/>&#xa;                        &lt;/ns:Publisher>&#xa;                    &lt;/ns:Book>&#xa;                &lt;/xsl:when>&#xa;                &lt;xsl:otherwise>&#xa;                    &lt;ns:Book>&#xa;                        &lt;ns:Title>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&#xa;                        &lt;/ns:Title>&#xa;                        &lt;ns:Author>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&#xa;                        &lt;/ns:Author>&#xa;                        &lt;ns:Date>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&#xa;                        &lt;/ns:Date>&#xa;                        &lt;ns:ISBN>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&#xa;                        &lt;/ns:ISBN>&#xa;                        &lt;ns:Publisher>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;Invalid&amp;quot;&quot;/>&#xa;                        &lt;/ns:Publisher>&#xa;                    &lt;/ns:Book>&#xa;                &lt;/xsl:otherwise>&#xa;            &lt;/xsl:choose>&#xa;        &lt;/ns:BookStore>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:config>
+                        <bwext:BWActivity
+                            activityTypeID="bw.generalactivities.mapper"
+                            version="6.0.0.001"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:books="http://www.example.com/xsd/books"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Mapper"/>
+                                    <value inputQName="books:BookStore" xsi:type="generalactivities:Mapper"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+        </bpws:flow>
+    </bpws:scope>
+</bpws:process>

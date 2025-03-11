@@ -1,0 +1,30 @@
+<post.httpHeaders>
+<tns1:httpHeaders xmlns:tns1="http://tns.tibco.com/bw/REST">
+  <Accept>application/json</Accept>
+  <Accept-Encoding>gzip,deflate</Accept-Encoding>
+  <Content-Type>application/json</Content-Type>
+  <Connection>keep-alive</Connection>
+  <DynamicHeaders>
+    <Header>
+      <Name>Transfer-Encoding</Name>
+      <Value>chunked</Value>
+    </Header>
+    <Header>
+      <Name>User-Agent</Name>
+      <Value>Jersey/2.21.1 (Apache HttpClient 4.3.3)</Value>
+    </Header>
+    <Header>
+      <Name>Host</Name>
+      <Value>localhost:8076</Value>
+    </Header>
+  </DynamicHeaders>
+</tns1:httpHeaders>
+</post.httpHeaders>
+<post.item>
+<Book xmlns="http://www.example.org/Books">
+  <isbn>123-554-343</isbn>
+  <name>Cat among the Pigeon</name>
+  <description>Dell Publishing Co</description>
+  <authorName>Agatha Christie</authorName>
+</Book>
+</post.item>

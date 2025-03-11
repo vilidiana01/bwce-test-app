@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:GetBooksImpl="http://www.example.com/interface/books/GetBooksImpl" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:axis2="http://xsd.tns.tibco.com/bw/models/binding/soap/axis2" xmlns:books="http://www.example.com/xsd/books" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:property="http://ns.tibco.com/bw/property" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_DzXCsB0LEeyNlJ-KEUFUMA" targetNamespace="http://tns.tibco.com/bw/composite/MainProcessWithUnitTestDemo" name="MainProcessWithUnitTestDemo" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_W1-QoB0OEeyNlJ-KEUFUMA" name="GetBooksByAuthor" promote="ComponentSOAP_Service/GetBooksByAuthor">
+    <sca:interface.wsdl xmi:id="_W2RLkB0OEeyNlJ-KEUFUMA" interface="http://www.example.com/interface/books/GetBooksImpl#wsdl.interface(GetBooksByAuthor)" scaext:wsdlLocation="../Service%20Descriptors/BooksService.wsdl"/>
+    <scaext:binding xsi:type="axis2:SOAPServiceBinding" xmi:id="_WX6JsB0QEeyNlJ-KEUFUMA" name="SOAPServiceBinding" targetNamespace="http://www.tibco.com/81dd23b20c884b98a4b98102774ef19f/SOAPServiceBinding" portTypeQName="GetBooksImpl:GetBooksByAuthor" transportBindingType="HTTP" attachmentStyle="SwA" modelVersion="1.2.0" portTypeWSDLLocation="platform:/resource/MainProcessWithUnitTestDemo/Service%20Descriptors/BooksService.wsdl">
+      <bindingType xmi:id="_WYO50B0QEeyNlJ-KEUFUMA"/>
+      <inboundConfiguration xsi:type="axis2:HttpTransportConfiguration" xmi:id="_lDnwMB0QEeyNlJ-KEUFUMA" endpointURI="/SOAPServiceBinding/getBooksByAuthor/" httpConnector="mainprocesswithunittestdemo.HTTPConnectorResource"/>
+      <operationConfiguration xmi:id="_WYQvAB0QEeyNlJ-KEUFUMA" description="" operationName="GetBooks" action="GetBooks" actionNeeded="true">
+        <bindingType xmi:id="_WYQvAR0QEeyNlJ-KEUFUMA"/>
+        <messageConfiguration xmi:id="_WYQvAh0QEeyNlJ-KEUFUMA" messageQName="GetBooksImpl:GetBooksByAuthor" wsdlLocation="platform:/resource/MainProcessWithUnitTestDemo/Service%20Descriptors/BooksService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_WYQvAx0QEeyNlJ-KEUFUMA" partName="author" partElementName="books:Author"/>
+        </messageConfiguration>
+        <messageConfiguration xmi:id="_WYQvBB0QEeyNlJ-KEUFUMA" messageQName="GetBooksImpl:GetBooksOut" messageDirection="OUTPUT" wsdlLocation="platform:/resource/MainProcessWithUnitTestDemo/Service%20Descriptors/BooksService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_WYQvBR0QEeyNlJ-KEUFUMA" partName="message" partElementName="books:BookStore"/>
+        </messageConfiguration>
+        <context xmi:id="_WYQvBh0QEeyNlJ-KEUFUMA">
+          <inputMapping xmi:id="_WYRWEB0QEeyNlJ-KEUFUMA"/>
+          <outputMapping xmi:id="_WYRWER0QEeyNlJ-KEUFUMA" direction="OUTPUT"/>
+        </context>
+      </operationConfiguration>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_WYR9IB0QEeyNlJ-KEUFUMA" bindingName="SOAPServiceBinding"/>
+  </sca:service>
+  <sca:service xmi:id="_jo-sch03EeyNlJ-KEUFUMA" name="resource" promote="ComponentResource/resource">
+    <sca:interface.wsdl xmi:id="_jo_6kB03EeyNlJ-KEUFUMA" interface="http://xmlns.example.com/20210924183139PLT#wsdl.interface(resource)" scaext:wsdlLocation="../Processes/mainprocesswithunittestdemo/Resource.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_jpLgwB03EeyNlJ-KEUFUMA" name="RestService" path="/resource" docBasePath="http://localhost:7777/MainProcessWithUnitTestDemo" docResourcePath="Resource" basePath="/" connector="mainprocesswithunittestdemo.HTTPConnectorResource" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/mainprocesswithunittestdemo.Resource-Resource.json">
+      <operation xmi:id="_jpYVEB03EeyNlJ-KEUFUMA" operationName="post" nickname="post-resource" httpMethod="POST" notes="postResource" responseStyle="element" requestStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_jp9j4B03EeyNlJ-KEUFUMA"/>
+      <advancedConfig xmi:id="_jpLgwR03EeyNlJ-KEUFUMA" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_jpYVER03EeyNlJ-KEUFUMA" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_GQi20B0LEeyNlJ-KEUFUMA" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_GQ8fcB0LEeyNlJ-KEUFUMA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_GRLI8B0LEeyNlJ-KEUFUMA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_GRXWMB0LEeyNlJ-KEUFUMA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_GRkxkB0LEeyNlJ-KEUFUMA" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_GRvwsB0LEeyNlJ-KEUFUMA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_GR4TkB0LEeyNlJ-KEUFUMA" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_GSBdgB0LEeyNlJ-KEUFUMA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_GSILMB0LEeyNlJ-KEUFUMA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_lVpewPteEe-43PqmfIIgrA" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_8mBOwP2fEe-nPb8RhZl-aA" name="/http/host" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_-UI9cP2fEe-nPb8RhZl-aA" name="/http/port" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="__blGoP2fEe-nPb8RhZl-aA" name="/http/client/host" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_AyqOUP2gEe-nPb8RhZl-aA" name="/http/client/port" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_FnOwkP2gEe-nPb8RhZl-aA" name="/jms/url" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_HPMM4P2gEe-nPb8RhZl-aA" name="/jms/user" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_IZhSAP2gEe-nPb8RhZl-aA" name="/jms/password" type="property:password" scaext:simpleValue="#!gs46bAnMVaPK3BjPVcmVCg==" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_F42IgB0LEeyNlJ-KEUFUMA" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_F42IgR0LEeyNlJ-KEUFUMA" processName="mainprocesswithunittestdemo.MainProcessWithProcessStarterMocked"/>
+  </sca:component>
+  <sca:component xmi:id="_QUrt4B0OEeyNlJ-KEUFUMA" name="ComponentSOAP_Service" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_QUrt4R0OEeyNlJ-KEUFUMA" processName="mainprocesswithunittestdemo.SOAPServiceBindingMocked"/>
+    <sca:service xmi:id="_W1w1QB0OEeyNlJ-KEUFUMA" name="GetBooksByAuthor">
+      <sca:interface.wsdl xmi:id="_W1z4kB0OEeyNlJ-KEUFUMA" interface="http://www.example.com/interface/books/GetBooksImpl#wsdl.interface(GetBooksByAuthor)" scaext:wsdlLocation="../Service%20Descriptors/BooksService.wsdl"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_jo9eUB03EeyNlJ-KEUFUMA" name="ComponentResource" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_jo9eUR03EeyNlJ-KEUFUMA" processName="mainprocesswithunittestdemo.RESTServicBindingeMocked"/>
+    <sca:service xmi:id="_jo-scB03EeyNlJ-KEUFUMA" name="resource">
+      <sca:interface.wsdl xmi:id="_jo-scR03EeyNlJ-KEUFUMA" interface="http://xmlns.example.com/20210924183139PLT#wsdl.interface(resource)" scaext:wsdlLocation="../Processes/mainprocesswithunittestdemo/Resource.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>
