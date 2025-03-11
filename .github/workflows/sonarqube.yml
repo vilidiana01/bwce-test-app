@@ -36,4 +36,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bwce-test-app -Dsonar.projectName='bwce-test-app'
+        run: | 
+          POM_FILE_LOCATION=$(find . -path "*.parent/pom.xml")
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f "$POM_FILE_LOCATION" -Dsonar.projectKey=bwce-test-app -Dsonar.projectName='bwce-test-app'
